@@ -15,14 +15,10 @@
       <button class="menu-step" @click="nextStep">Step</button>
       <button class="menu-auto" @click="autoStep">Auto</button>
     </div>
-    {{ stack1.items }}
-    {{ stack2.items }}
-    {{ stack3.items }}
   </div>
 </template>
   <script>
-import { mapMutations } from "vuex";
-import Stack from "../utils/stack.js";
+import { mapState, mapMutations } from "vuex";
 
 export default {
   data() {
@@ -30,23 +26,25 @@ export default {
       inputNumber: "",
       count: 0,
       finish: false,
-      stack1: new Stack(),
-      stack2: new Stack(),
-      stack3: new Stack(),
-      task: new Stack(),
     };
   },
+  computed: {
+    ...mapState({
+      stack1: "stack1",
+      stack2: "stack2",
+      stack3: "stack3",
+      task: "task",
+    }),
+  },
   methods: {
-    ...mapMutations(["SET_NUMBER"]),
+    ...mapMutations(["SET_NUMBER", "CLEAR_STACK"]),
     onSubmit() {
       const temp = this.inputNumber;
-      this.SET_NUMBER(temp);
-      const number = Number(temp);
-      for (let i = number; i > 0; i--) {
-        this[`stack1`].push(i);
+      if (temp < 1 || temp > 50) {
+        return alert("0 ~ 50");
       }
-      // task : 초기 상태 push
-      this.task.push([number, 1, 2, 3]);
+      this.CLEAR_STACK();
+      this.SET_NUMBER(temp);
       this.inputNumber = "";
     },
     nextStep() {

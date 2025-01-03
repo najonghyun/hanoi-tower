@@ -13,7 +13,6 @@ class Stack {
     if (this.items.length === 0) {
       return null;
     }
-
     return this.items[this.items.length - 1];
   }
   getSize() {
@@ -21,6 +20,11 @@ class Stack {
   }
   isEmpty() {
     return this.getSize() === 0;
+  }
+  clear() {
+    while (this.items.length > 0) {
+      this.items.pop();
+    }
   }
 }
 
