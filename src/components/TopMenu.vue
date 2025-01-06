@@ -14,6 +14,7 @@
     <div class="menu-step">
       <button class="menu-step" @click="nextStep">Step</button>
       <button class="menu-auto" @click="autoStep">Auto</button>
+      {{ count }}
     </div>
   </div>
 </template>
@@ -46,6 +47,8 @@ export default {
       this.CLEAR_STACK();
       this.SET_NUMBER(temp);
       this.inputNumber = "";
+      this.finish = false;
+      this.count = 0;
     },
     nextStep() {
       if (this.task.isEmpty()) {
