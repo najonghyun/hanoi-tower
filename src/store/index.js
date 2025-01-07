@@ -4,14 +4,24 @@ import Stack from "../utils/stack.js";
 
 Vue.use(Vuex);
 
-const color = ["#FF6347", "#FFD700", "#98FB98", "#8A2BE2", "#20B2AA"];
+const color = [
+  "#FF6B6B", // 빨강
+  "#FFA07A", // 주황
+  "#FFDA6A", // 노랑
+  "#77DD77", // 초록
+  "#72DDF7", // 하늘
+  "#4A90E2", // 파랑
+  "#C58CF2", // 보라
+];
 
 const store = new Vuex.Store({
   state: {
     number: 0,
-    stack1: new Stack(),
-    stack2: new Stack(),
-    stack3: new Stack(),
+    stacks: [
+      { id: 1, data: new Stack() },
+      { id: 2, data: new Stack() },
+      { id: 3, data: new Stack() },
+    ],
     task: new Stack(),
   },
   mutations: {
@@ -19,16 +29,22 @@ const store = new Vuex.Store({
       const num = Number(newNumber);
       state.number = num;
       for (let i = num; i > 0; i--) {
-        state.stack1.push({ id: i, color: color[i] });
+        state.stacks[0].data.push({
+          id: i,
+          color: color[i - 1],
+          offsetX: 200,
+          offsetY: (i - num) * 20,
+          hidden: false,
+        });
       }
       // task : 초기 상태 push
       state.task.push([state.number, 1, 2, 3]);
+      console.log(state.stacks[0]);
     },
     CLEAR_STACK(state) {
-      state.stack1.clear();
-      state.stack2.clear();
-      state.stack3.clear();
-      state.task.clear();
+      state.stacks[0].data.clear();
+      state.stacks[1].data.clear();
+      state.stacks[2].data.clear();
     },
   },
 });

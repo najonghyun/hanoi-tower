@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="menu-box">
     <div class="menu-count">
       <form @submit.prevent="onSubmit">
         <input
@@ -12,9 +12,9 @@
       </form>
     </div>
     <div class="menu-step">
-      <button class="menu-step" @click="nextStep">Step</button>
-      <button class="menu-auto" @click="autoStep">Auto</button>
       {{ count }}
+      <button class="menu-step-button" @click="nextStep">Step</button>
+      <button class="menu-auto-button" @click="autoStep">Auto</button>
     </div>
   </div>
 </template>
@@ -29,11 +29,12 @@ export default {
       finish: false,
     };
   },
+  created() {
+    this.CLEAR_STACK();
+  },
   computed: {
     ...mapState({
-      stack1: "stack1",
-      stack2: "stack2",
-      stack3: "stack3",
+      stacks: "stacks",
       task: "task",
     }),
   },
@@ -64,6 +65,7 @@ export default {
 
       if (n == 1) {
         this.move(from, to);
+
         this.count++;
         console.log("Step " + this.count + ": " + from + "->" + to);
       } else {
@@ -84,17 +86,62 @@ export default {
       }, 1000);
     },
     move(from, to) {
-      this[`stack${to}`].push(this[`stack${from}`].pop());
+      const fromCircle = this.stacks[from - 1].data.peek();
+      const targetX = (to - 1) * 400 + 200;
+      const targetY = -this.stacks[to - 1].data.getSize() * 20;
+      fromCircle.offsetX = targetX;
+      fromCircle.offsetY = targetY;
+
+      this.$nextTick(() => {
+        this.stacks[from - 1].data.pop();
+        this.stacks[to - 1].data.push(fromCircle);
+        const toCircle = this.stacks[to - 1].data.peek();
+        if (toCircle) {
+          toCircle.hidden = true;
+        }
+        setTimeout(() => {
+          if (toCircle) {
+            toCircle.hidden = false;
+          }
+        }, 450);
+      });
     },
   },
 };
 </script>
   <style>
+.menu-box {
+  width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
 .menu-count {
   display: flex;
 }
 .menu-count-text {
+  height: 38px;
+  width: 120px;
+  padding-left: 10px;
+  border-radius: 10px;
+  border: gray 1px solid;
+  font-size: 1rem;
 }
 .menu-count-button {
+  margin-left: 5px;
+  height: 40px;
+  width: 60px;
+  border-radius: 10px;
+  border: none;
+  background-color: lightgray;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.menu-count-button:hover {
+  background-color: rgb(179, 179, 179);
+}
+.menu-step-button {
+}
+.menu-auto-button {
 }
 </style>

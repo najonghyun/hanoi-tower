@@ -1,54 +1,32 @@
 <template>
   <div class="body">
-    <!-- 하노이부분
-    {{ stack1.items }}
-    {{ stack2.items }}
-    {{ stack3.items }} -->
     <div class="hanoi-container">
       <div class="hanoi-topbox">
-        <div class="hanoi-stack1"><div class="hanoi-stack-bar"></div></div>
-        <div class="hanoi-stack2"><div class="hanoi-stack-bar"></div></div>
-        <div class="hanoi-stack3"><div class="hanoi-stack-bar"></div></div>
+        <div class="hanoi-stack"><div class="hanoi-stack-bar"></div></div>
+        <div class="hanoi-stack"><div class="hanoi-stack-bar"></div></div>
+        <div class="hanoi-stack"><div class="hanoi-stack-bar"></div></div>
       </div>
       <div class="hanoi-item-box">
-        <div class="hanoi-item-stack">
-          <div
-            v-for="item in [...stack1.items].reverse()"
-            :key="item.id"
-            class="hanoi-item-circle"
-            :style="{
-              width: `${40 + item.id * 20}px`,
-              backgroundColor: item.color,
-            }"
-          >
-            {{ item.id }}
-          </div>
-        </div>
-        <div class="hanoi-item-stack">
-          <div
-            class="hanoi-item-circle"
-            v-for="item in [...stack2.items].reverse()"
-            :key="item.id"
-            :style="{
-              width: `${40 + item.id * 20}px`,
-              backgroundColor: item.color,
-            }"
-          ></div>
-        </div>
-        <div class="hanoi-item-stack">
-          <div
-            class="hanoi-item-circle"
-            v-for="item in [...stack3.items].reverse()"
-            :key="item.id"
-            :style="{
-              width: `${40 + item.id * 20}px`,
-              backgroundColor: item.color,
-            }"
-          ></div>
+        <div class="hanoi-item-stack" v-for="stack in stacks" :key="stack.id">
+          <transition-group class="hanoi-item-move" name="hanoi-move" tag="div">
+            <div
+              v-for="item in stack.data.items"
+              :key="item.id"
+              class="hanoi-move-circle"
+              :style="{
+                width: `${40 + item.id * 20}px`,
+                backgroundColor: item.color,
+                transform: `translateX(calc(${item.offsetX}px - 50%)) translateY(${item.offsetY}px)`,
+                opacity: item.hidden ? 0 : 1,
+              }"
+            >
+              {{ item.id }}
+            </div>
+          </transition-group>
         </div>
       </div>
       <div class="hanoi-bottombox"></div>
-      {{ count }}
+      {{ number }}
     </div>
   </div>
 </template>
@@ -65,9 +43,7 @@ export default {
   computed: {
     ...mapState({
       number: "number",
-      stack1: "stack1",
-      stack2: "stack2",
-      stack3: "stack3",
+      stacks: "stacks",
     }),
   },
   methods: {},
@@ -78,33 +54,23 @@ export default {
   position: relative;
 }
 .hanoi-container {
-  width: 100%;
-  min-width: 1000px;
+  width: 1200px;
   position: absolute;
   height: 500px;
 }
 .hanoi-topbox {
   display: flex;
 }
-.hanoi-stack1 {
+.hanoi-stack {
   flex: 1;
-  background-color: aqua;
   justify-items: center;
 }
-.hanoi-stack2 {
-  flex: 1;
-  background-color: darkmagenta;
-  justify-items: center;
-}
-.hanoi-stack3 {
-  flex: 1;
-  background-color: blanchedalmond;
-  justify-items: center;
-}
+
 .hanoi-stack-bar {
-  width: 20px;
-  height: 500px;
-  background-color: black;
+  margin-top: 100px;
+  width: 15px;
+  height: 400px;
+  background-color: #331800;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
@@ -119,18 +85,33 @@ export default {
   display: flex;
 }
 .hanoi-item-stack {
-  flex: 1;
-  justify-items: center;
-  align-self: end;
 }
-.hanoi-item-circle {
-  width: 100px;
+
+.hanoi-item-move {
+}
+
+.hanoi-move-circle {
+  position: absolute;
   height: 20px;
-  background-color: brown;
+  bottom: 0;
   border-radius: 20px;
+  transition: transform 0.5s ease;
+  transform: translateX(-50%);
 }
+
+/* .hanoi-move-enter,
+.hanoi-move-leave-to {
+  transform: translateX(0) translateY(0);
+} */
+
+/* .hanoi-move-enter-active,
+.hanoi-move-leave-active {
+  transition: transform 0.5s ease;
+} */
+
 .hanoi-bottombox {
-  background-color: black;
-  height: 25px;
+  background-color: #331800;
+  height: 35px;
+  border-radius: 10px;
 }
 </style>
