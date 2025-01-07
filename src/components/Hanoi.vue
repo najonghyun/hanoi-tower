@@ -14,7 +14,7 @@
               :key="item.id"
               class="hanoi-move-circle"
               :style="{
-                width: `${40 + item.id * 20}px`,
+                width: `${25 + item.id * 28}px`,
                 backgroundColor: item.color,
                 transform: `translateX(calc(${item.offsetX}px - 50%)) translateY(${item.offsetY}px)`,
                 opacity: item.hidden ? 0 : 1,
@@ -97,6 +97,10 @@ export default {
   border-radius: 20px;
   transition: transform 0.5s ease;
   transform: translateX(-50%);
+  text-align: center;
+  align-content: center;
+  font-size: 0.5rem;
+  font-weight: 600;
 }
 
 /* .hanoi-move-enter,

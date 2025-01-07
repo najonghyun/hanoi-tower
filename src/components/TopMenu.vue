@@ -11,10 +11,16 @@
         <button class="menu-count-button" type="submit">준비</button>
       </form>
     </div>
-    <div class="menu-step">
-      {{ count }}
-      <button class="menu-step-button" @click="nextStep">Step</button>
-      <button class="menu-auto-button" @click="autoStep">Auto</button>
+    <div v-if="ready" class="menu-step">
+      <div class="menu-main-text">{{ count }}</div>
+      <button class="menu-step-button" @click="nextStep">
+        <div class="menu-step-text">Step</div>
+        <font-awesome-icon icon="arrow-right" size="xl" />
+      </button>
+      <button class="menu-auto-button" @click="autoStep">
+        <div class="menu-auto-text">Auto</div>
+        <font-awesome-icon icon="arrow-right" size="xl" spin-pulse />
+      </button>
     </div>
   </div>
 </template>
@@ -25,6 +31,7 @@ export default {
   data() {
     return {
       inputNumber: "",
+      ready: false,
       count: 0,
       finish: false,
     };
@@ -42,12 +49,13 @@ export default {
     ...mapMutations(["SET_NUMBER", "CLEAR_STACK"]),
     onSubmit() {
       const temp = this.inputNumber;
-      if (temp < 1 || temp > 50) {
-        return alert("0 ~ 50");
+      if (temp < 1 || temp > 13) {
+        return alert("최소 '1'이상 최대 '13'이내로 숫자를 입력해주세요");
       }
       this.CLEAR_STACK();
       this.SET_NUMBER(temp);
       this.inputNumber = "";
+      this.ready = true;
       this.finish = false;
       this.count = 0;
     },
@@ -65,9 +73,12 @@ export default {
 
       if (n == 1) {
         this.move(from, to);
-
         this.count++;
         console.log("Step " + this.count + ": " + from + "->" + to);
+        if (this.task.isEmpty()) {
+          // 여기서 한번 더 해줘서 finish가 true 되는 딜레이 방지
+          this.finish = true;
+        }
       } else {
         this.task.push([n - 1, temp, from, to]);
         this.task.push([1, from, temp, to]);
@@ -83,7 +94,7 @@ export default {
         } else {
           this.nextStep();
         }
-      }, 1000);
+      }, 500);
     },
     move(from, to) {
       const fromCircle = this.stacks[from - 1].data.peek();
@@ -140,8 +151,49 @@ export default {
 .menu-count-button:hover {
   background-color: rgb(179, 179, 179);
 }
+
+.menu-step {
+  display: flex;
+}
+.menu-main-text {
+  font-size: 1.75rem;
+  padding-right: 30px;
+}
 .menu-step-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 90px;
+  border-radius: 10px;
+  border: none;
+  background-color: lightgray;
+  margin: 0 20px;
+}
+.menu-step-button:hover {
+  background-color: rgb(179, 179, 179);
+}
+.menu-step-text {
+  font-size: 1rem;
+  font-weight: 600;
+  padding-right: 5px;
 }
 .menu-auto-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 90px;
+  border-radius: 10px;
+  border: none;
+  background-color: lightgray;
+}
+.menu-auto-button:hover {
+  background-color: rgb(179, 179, 179);
+}
+.menu-auto-text {
+  font-size: 1rem;
+  font-weight: 600;
+  padding-right: 5px;
 }
 </style>
