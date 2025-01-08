@@ -20,8 +20,15 @@ export default {
 </script>
 
 <style>
-.container {
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   height: 100vh;
+}
+.container {
+  height: calc(100vh - 60px);
   padding: 30px;
 }
 </style>

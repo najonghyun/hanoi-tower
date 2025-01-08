@@ -1,32 +1,40 @@
 <template>
-  <div class="menu-box">
-    <div class="menu-count">
-      <form @submit.prevent="onSubmit">
-        <input
-          class="menu-count-text"
-          type="number"
-          placeholder="숫자 입력"
-          v-model="inputNumber"
-        />
-        <button class="menu-count-button" type="submit">준비</button>
-      </form>
-    </div>
-    <div v-if="ready" class="menu-step">
-      <div class="menu-main-text" :style="{ color: finish ? 'red' : 'black' }">
-        {{ count }}
+  <div class="menu-container">
+    <div class="menu-box">
+      <div class="menu-count">
+        <form @submit.prevent="onSubmit">
+          <input
+            class="menu-count-text"
+            type="number"
+            placeholder="숫자 입력"
+            v-model="inputNumber"
+          />
+          <button class="menu-count-button" type="submit">준비</button>
+        </form>
       </div>
-      <button
-        class="menu-step-button"
-        :disabled="auto || moving || finish"
-        @click="nextStep"
-      >
-        <div class="menu-step-text">Step</div>
-        <font-awesome-icon icon="arrow-right" size="xl" />
-      </button>
-      <button class="menu-auto-button" @click="autoStep" :disabled="finish">
-        <div class="menu-auto-text">Auto</div>
-        <font-awesome-icon icon="arrow-right" size="xl" :spin-pulse="auto" />
-      </button>
+      <div v-if="ready" class="menu-step">
+        <div
+          class="menu-main-text"
+          :style="{ color: finish ? 'red' : 'black' }"
+        >
+          {{ count }}
+        </div>
+        <button
+          class="menu-step-button"
+          :disabled="auto || moving || finish"
+          @click="nextStep"
+        >
+          <div class="menu-step-text">Step</div>
+          <font-awesome-icon icon="arrow-right" size="xl" />
+        </button>
+        <button class="menu-auto-button" @click="autoStep" :disabled="finish">
+          <div class="menu-auto-text">Auto</div>
+          <font-awesome-icon icon="arrow-right" size="xl" :spin-pulse="auto" />
+        </button>
+      </div>
+    </div>
+    <div class="menu-footer">
+      원판 개수 : <span class="menu-footer-number">{{ number }}</span>
     </div>
   </div>
 </template>
@@ -50,6 +58,7 @@ export default {
   },
   computed: {
     ...mapState({
+      number: "number",
       stacks: "stacks",
       task: "task",
     }),
@@ -232,5 +241,14 @@ export default {
   font-size: 1rem;
   font-weight: 600;
   padding-right: 5px;
+}
+.menu-footer {
+  padding: 10px 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.menu-footer-number {
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 </style>

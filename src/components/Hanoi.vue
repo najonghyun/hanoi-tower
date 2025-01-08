@@ -26,7 +26,6 @@
         </div>
       </div>
       <div class="hanoi-bottombox"></div>
-      {{ number }}
     </div>
   </div>
 </template>
@@ -42,14 +41,13 @@ export default {
   },
   computed: {
     ...mapState({
-      number: "number",
       stacks: "stacks",
     }),
   },
   methods: {},
 };
 </script>
-<style>
+<style scope>
 .body {
   position: relative;
 }
@@ -71,6 +69,8 @@ export default {
   width: 15px;
   height: 270px;
   background-color: #331800;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
+    url("../assets/image/wood.jpg");
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
@@ -94,7 +94,7 @@ export default {
   position: absolute;
   height: 20px;
   bottom: 0;
-  border-radius: 20px;
+  border-radius: 8px;
   transition: transform 0.5s cubic-bezier(0.25, 1, 0.3, 1);
   transform: translateX(-50%);
   text-align: center;
@@ -114,7 +114,9 @@ export default {
 } */
 
 .hanoi-bottombox {
-  background-color: #331800;
+  /* background-color: #331800; */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)),
+    url("../assets/image/wood.jpg");
   height: 35px;
   border-radius: 10px;
 }
