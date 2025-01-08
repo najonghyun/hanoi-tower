@@ -19,7 +19,7 @@
       </button>
       <button class="menu-auto-button" @click="autoStep">
         <div class="menu-auto-text">Auto</div>
-        <font-awesome-icon icon="arrow-right" size="xl" spin-pulse />
+        <font-awesome-icon icon="arrow-right" size="xl" :spin-pulse="auto" />
       </button>
     </div>
   </div>
@@ -33,7 +33,9 @@ export default {
       inputNumber: "",
       ready: false,
       count: 0,
+      auto: false,
       finish: false,
+      interval: null,
     };
   },
   created() {
@@ -87,9 +89,18 @@ export default {
       }
     },
     autoStep() {
-      let interval = setInterval(() => {
+      if (this.auto) {
+        this.auto = false;
+        clearInterval(this.interval);
+        this.interval = null;
+        return;
+      }
+      this.auto = true;
+      this.interval = setInterval(() => {
         if (this.finish) {
-          clearInterval(interval);
+          this.auto = false;
+          clearInterval(this.interval);
+          this.interval = null;
           console.log("작업 완료");
         } else {
           this.nextStep();

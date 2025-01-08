@@ -56,7 +56,7 @@ export default {
 .hanoi-container {
   width: 1200px;
   position: absolute;
-  height: 500px;
+  height: 400px;
 }
 .hanoi-topbox {
   display: flex;
@@ -67,9 +67,9 @@ export default {
 }
 
 .hanoi-stack-bar {
-  margin-top: 100px;
+  margin-top: 130px;
   width: 15px;
-  height: 400px;
+  height: 270px;
   background-color: #331800;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -80,7 +80,7 @@ export default {
   top: 0;
   left: 0;
   z-index: 2;
-  height: 500px;
+  height: 400px;
   min-width: 1000px;
   display: flex;
 }
