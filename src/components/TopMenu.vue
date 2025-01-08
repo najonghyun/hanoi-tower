@@ -8,6 +8,7 @@
             type="number"
             placeholder="숫자 입력"
             v-model="inputNumber"
+            ref="input"
           />
           <button class="menu-count-button" type="submit">준비</button>
         </form>
@@ -55,6 +56,9 @@ export default {
   },
   created() {
     this.CLEAR_STACK();
+  },
+  mounted() {
+    this.$refs.input.focus();
   },
   computed: {
     ...mapState({
@@ -166,7 +170,7 @@ export default {
   },
 };
 </script>
-  <style>
+<style>
 .menu-box {
   width: 1200px;
   display: flex;
@@ -193,6 +197,7 @@ export default {
   background-color: lightgray;
   font-size: 1rem;
   font-weight: 600;
+  cursor: pointer;
 }
 .menu-count-button:hover {
   background-color: rgb(179, 179, 179);
@@ -215,9 +220,13 @@ export default {
   border: none;
   background-color: lightgray;
   margin: 0 20px;
+  cursor: pointer;
 }
 .menu-step-button:hover {
   background-color: rgb(179, 179, 179);
+}
+.menu-step-button:disabled {
+  pointer-events: none;
 }
 .menu-step-text {
   font-size: 1rem;
@@ -233,9 +242,13 @@ export default {
   border-radius: 10px;
   border: none;
   background-color: lightgray;
+  cursor: pointer;
 }
 .menu-auto-button:hover {
   background-color: rgb(179, 179, 179);
+}
+.menu-auto-button:disabled {
+  pointer-events: none;
 }
 .menu-auto-text {
   font-size: 1rem;

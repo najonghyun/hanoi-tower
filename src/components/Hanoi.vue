@@ -15,7 +15,7 @@
               class="hanoi-move-circle"
               :style="{
                 width: `${25 + item.id * 28}px`,
-                backgroundColor: item.color,
+                backgroundImage: `linear-gradient(180deg, ${item.color}, ${item.darkColor})`,
                 transform: `translate3d(calc(${item.offsetX}px - 50%), ${item.offsetY}px, 0)`,
                 opacity: item.hidden ? 0 : 1,
               }"
@@ -47,7 +47,7 @@ export default {
   methods: {},
 };
 </script>
-<style scope>
+<style>
 .body {
   position: relative;
 }
@@ -68,7 +68,6 @@ export default {
   margin-top: 130px;
   width: 15px;
   height: 270px;
-  background-color: #331800;
   background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
     url("../assets/image/wood.jpg");
   border-top-left-radius: 20px;
@@ -97,24 +96,14 @@ export default {
   border-radius: 8px;
   transition: transform 0.5s cubic-bezier(0.25, 1, 0.3, 1);
   transform: translateX(-50%);
+  box-shadow: 0.5px 0.5px 0.5px #5c5c5c;
   text-align: center;
   align-content: center;
   font-size: 0.5rem;
   font-weight: 600;
 }
 
-/* .hanoi-move-enter,
-.hanoi-move-leave-to {
-  transform: translateX(0) translateY(0);
-} */
-
-/* .hanoi-move-enter-active,
-.hanoi-move-leave-active {
-  transition: transform 0.5s ease;
-} */
-
 .hanoi-bottombox {
-  /* background-color: #331800; */
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)),
     url("../assets/image/wood.jpg");
   height: 35px;
