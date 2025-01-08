@@ -12,12 +12,18 @@
       </form>
     </div>
     <div v-if="ready" class="menu-step">
-      <div class="menu-main-text">{{ count }}</div>
-      <button class="menu-step-button" @click="nextStep">
+      <div class="menu-main-text" :style="{ color: finish ? 'red' : 'black' }">
+        {{ count }}
+      </div>
+      <button
+        class="menu-step-button"
+        :disabled="auto || moving || finish"
+        @click="nextStep"
+      >
         <div class="menu-step-text">Step</div>
         <font-awesome-icon icon="arrow-right" size="xl" />
       </button>
-      <button class="menu-auto-button" @click="autoStep">
+      <button class="menu-auto-button" @click="autoStep" :disabled="finish">
         <div class="menu-auto-text">Auto</div>
         <font-awesome-icon icon="arrow-right" size="xl" :spin-pulse="auto" />
       </button>
@@ -33,6 +39,7 @@ export default {
       inputNumber: "",
       ready: false,
       count: 0,
+      moving: false,
       auto: false,
       finish: false,
       interval: null,
@@ -59,9 +66,13 @@ export default {
       this.inputNumber = "";
       this.ready = true;
       this.finish = false;
+      this.moving = false;
       this.count = 0;
+      clearInterval(this.interval);
+      this.auto = false;
     },
     nextStep() {
+      this.moving = true;
       if (this.task.isEmpty()) {
         this.finish = true;
         console.log("모든 작업 끝");
@@ -101,22 +112,37 @@ export default {
           this.auto = false;
           clearInterval(this.interval);
           this.interval = null;
-          console.log("작업 완료");
+          console.log("auto 완료");
         } else {
           this.nextStep();
         }
-      }, 500);
+      }, 700);
     },
     move(from, to) {
       const fromCircle = this.stacks[from - 1].data.peek();
       const targetX = (to - 1) * 400 + 200;
       const targetY = -this.stacks[to - 1].data.getSize() * 20;
-      fromCircle.offsetX = targetX;
-      fromCircle.offsetY = targetY;
+      // fromCircle.offsetX = targetX;
+      // fromCircle.offsetY = targetY;
+
+      // 1. 위로 올리기 (Y축 이동)
+      fromCircle.offsetY = -300;
+
+      // 2. 옆으로 옮기기 X축 이동
+      setTimeout(() => {
+        fromCircle.offsetX = targetX;
+      }, 500);
+
+      // 3. 아래로 내리기 (Y축 이동)
+      setTimeout(() => {
+        fromCircle.offsetY = targetY;
+        this.moving = false;
+      }, 800);
 
       this.$nextTick(() => {
         this.stacks[from - 1].data.pop();
         this.stacks[to - 1].data.push(fromCircle);
+
         const toCircle = this.stacks[to - 1].data.peek();
         if (toCircle) {
           toCircle.hidden = true;

@@ -16,7 +16,7 @@
               :style="{
                 width: `${25 + item.id * 28}px`,
                 backgroundColor: item.color,
-                transform: `translateX(calc(${item.offsetX}px - 50%)) translateY(${item.offsetY}px)`,
+                transform: `translate3d(calc(${item.offsetX}px - 50%), ${item.offsetY}px, 0)`,
                 opacity: item.hidden ? 0 : 1,
               }"
             >
@@ -95,7 +95,7 @@ export default {
   height: 20px;
   bottom: 0;
   border-radius: 20px;
-  transition: transform 0.5s ease;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.3, 1);
   transform: translateX(-50%);
   text-align: center;
   align-content: center;

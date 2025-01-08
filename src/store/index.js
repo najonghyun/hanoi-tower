@@ -51,6 +51,7 @@ const store = new Vuex.Store({
       state.stacks[0].data.clear();
       state.stacks[1].data.clear();
       state.stacks[2].data.clear();
+      state.task.clear();
     },
   },
 });
