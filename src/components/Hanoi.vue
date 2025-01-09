@@ -7,8 +7,8 @@
         <div class="hanoi-stack"><div class="hanoi-stack-bar"></div></div>
       </div>
       <div class="hanoi-item-box">
-        <div class="hanoi-item-stack" v-for="stack in stacks" :key="stack.id">
-          <transition-group class="hanoi-item-move" name="hanoi-move" tag="div">
+        <div v-for="stack in stacks" :key="stack.id">
+          <transition-group name="hanoi-move" tag="div">
             <div
               v-for="item in stack.data.items"
               :key="item.id"
@@ -44,7 +44,6 @@ export default {
       stacks: "stacks",
     }),
   },
-  methods: {},
 };
 </script>
 <style>
@@ -56,6 +55,7 @@ export default {
   position: absolute;
   height: 400px;
 }
+
 .hanoi-topbox {
   display: flex;
 }
@@ -63,13 +63,12 @@ export default {
   flex: 1;
   justify-items: center;
 }
-
 .hanoi-stack-bar {
   margin-top: 130px;
   width: 15px;
   height: 270px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
-    url("../assets/image/wood.jpg");
+    url("../assets/images/wood.jpg");
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
@@ -83,12 +82,6 @@ export default {
   min-width: 1000px;
   display: flex;
 }
-.hanoi-item-stack {
-}
-
-.hanoi-item-move {
-}
-
 .hanoi-move-circle {
   position: absolute;
   height: 20px;
@@ -106,7 +99,7 @@ export default {
 
 .hanoi-bottombox {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)),
-    url("../assets/image/wood.jpg");
+    url("../assets/images/wood.jpg");
   height: 35px;
   border-radius: 10px;
 }

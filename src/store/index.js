@@ -44,9 +44,8 @@ const store = new Vuex.Store({
           hidden: false,
         });
       }
-      // task : 초기 상태 push
+      // 초기 : n개의 원판 초기 상태로 task에 push
       state.task.push([state.number, 1, 2, 3]);
-      console.log(state.stacks[0]);
     },
     CLEAR_STACK(state) {
       state.stacks[0].data.clear();

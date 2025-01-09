@@ -42,8 +42,8 @@
     <img
       v-if="finish"
       class="menu-footer-finish"
-      src="../assets/image/finish.png"
-      alt=""
+      src="../assets/images/finish.png"
+      alt="finish"
     />
   </div>
 </template>
@@ -62,9 +62,9 @@ export default {
       interval: null,
     };
   },
-  created() {
-    this.CLEAR_STACK();
-  },
+  // created() {
+  //   this.CLEAR_STACK();
+  // },
   mounted() {
     this.$refs.input.focus();
   },
@@ -80,6 +80,7 @@ export default {
   },
   methods: {
     ...mapMutations(["SET_NUMBER", "CLEAR_STACK"]),
+    /* onSubmit() : input에 숫자 입력 후 제출 시 */
     onSubmit() {
       const temp = this.inputNumber;
       if (temp < 1 || temp > 13) {
@@ -87,6 +88,10 @@ export default {
       }
       this.CLEAR_STACK();
       this.SET_NUMBER(temp);
+      this.clearData();
+    },
+    /* clearData() : 전에 하고 있던 데이터들 초기화 */
+    clearData() {
       this.inputNumber = "";
       this.ready = true;
       this.finish = false;
@@ -95,34 +100,38 @@ export default {
       clearInterval(this.interval);
       this.auto = false;
     },
+    /* nextStep() : 하노이 원판 이동을 한번 진행 (dfs 사용) */
     nextStep() {
       this.moving = true;
+      // 스택이 비었으면 종료
       if (this.task.isEmpty()) {
+        // console.log("모두 옮김")
         this.finish = true;
-        console.log("모든 작업 끝");
         return;
       }
-      const n = this.task.peek()[0];
-      const from = this.task.peek()[1];
-      const temp = this.task.peek()[2];
-      const to = this.task.peek()[3];
-      this.task.pop();
 
+      const [n, from, temp, to] = this.task.pop();
       if (n == 1) {
+        // console.log("Step " + this.count + ": " + from + "->" + to);
         this.move(from, to);
         this.count++;
-        console.log("Step " + this.count + ": " + from + "->" + to);
+        // 여기서 한번 더 해줘서 finish가 true 되는 딜레이 방지
         if (this.task.isEmpty()) {
-          // 여기서 한번 더 해줘서 finish가 true 되는 딜레이 방지
           this.finish = true;
         }
       } else {
+        // Stack 이므로 역순으로 진행!!
+        // 3. 다시 n-1개의 원판 2 -> 3으로 이동
         this.task.push([n - 1, temp, from, to]);
+        // 2. 가장 아래 원판 1 -> 3으로 이동
         this.task.push([1, from, temp, to]);
+        // 1. n-1개 까지 원판 1 -> 2로 이동
         this.task.push([n - 1, from, to, temp]);
+        // 4. 이동을 안했으므로 재귀 호출출
         this.nextStep();
       }
     },
+    /* autoStep() : 하노이 원판 이동을 계속 진행 (멈춤 제어 전까지) */
     autoStep() {
       if (this.auto) {
         this.auto = false;
@@ -131,42 +140,46 @@ export default {
         return;
       }
       this.auto = true;
+      // setInterval()함수 사용하여 0.7s 마다 반복실행
       this.interval = setInterval(() => {
         if (this.finish) {
           this.auto = false;
           clearInterval(this.interval);
           this.interval = null;
-          console.log("auto 완료");
+          // console.log("Auto 완료");
         } else {
           this.nextStep();
         }
       }, 700);
     },
+    /* move(from, to) : from에서 to로 원판을 실제 옮기는 함수 */
     move(from, to) {
+      // 1. 옮길 Stack에서 원판 가져오고 옮겨질 위치의 x, y축 계산
       const fromCircle = this.stacks[from - 1].data.peek();
       const targetX = (to - 1) * 400 + 200;
       const targetY = -this.stacks[to - 1].data.getSize() * 20;
-      // fromCircle.offsetX = targetX;
-      // fromCircle.offsetY = targetY;
 
-      // 1. 위로 올리기 (Y축 이동)
+      // 2. 원판을 각 차례로 이동 (setTimeout()으로 각각의 위치이동을 제어)
+      // 2-1. 위로 올리기 (Y축 이동)
       fromCircle.offsetY = -300;
 
-      // 2. 옆으로 옮기기 X축 이동
+      // 2-2. 옆으로 옮기기 X축 이동
       setTimeout(() => {
         fromCircle.offsetX = targetX;
       }, 500);
 
-      // 3. 아래로 내리기 (Y축 이동)
+      // 2-3. 아래로 내리기 (Y축 이동)
       setTimeout(() => {
         fromCircle.offsetY = targetY;
         this.moving = false;
       }, 800);
 
+      // 3. $nextTick안에서 교체된 위치 값 데이터 적용(vue에서는 그래야 transition이 발동함)
       this.$nextTick(() => {
         this.stacks[from - 1].data.pop();
         this.stacks[to - 1].data.push(fromCircle);
 
+        // 원판이 미리 target 스택에 들어와 있는 현상 방지하기 위해 hidden과 setTimeout()으로 제어
         const toCircle = this.stacks[to - 1].data.peek();
         if (toCircle) {
           toCircle.hidden = true;
@@ -227,7 +240,6 @@ export default {
   display: flex;
 }
 .menu-main-text {
-  /* font-family: "SejongGeulggot"; */
   font-size: 1.75rem;
   padding-right: 30px;
 }
