@@ -1,5 +1,6 @@
 <template>
   <div class="menu-container">
+    <div class="menu-title">하노이의 탑 구현</div>
     <div class="menu-box">
       <div class="menu-count">
         <form @submit.prevent="onSubmit">
@@ -22,8 +23,9 @@
         </div>
         <button
           class="menu-step-button"
-          :disabled="auto || moving || finish"
+          :disabled="disabledStep"
           @click="nextStep"
+          :style="{ backgroundColor: disabledStep ? 'lightgray' : '#696969' }"
         >
           <div class="menu-step-text">Step</div>
           <font-awesome-icon icon="arrow-right" size="xl" />
@@ -34,9 +36,15 @@
         </button>
       </div>
     </div>
-    <div class="menu-footer">
+    <div v-if="ready" class="menu-footer">
       원판 개수 : <span class="menu-footer-number">{{ number }}</span>
     </div>
+    <img
+      v-if="finish"
+      class="menu-footer-finish"
+      src="../assets/image/finish.png"
+      alt=""
+    />
   </div>
 </template>
   <script>
@@ -61,6 +69,9 @@ export default {
     this.$refs.input.focus();
   },
   computed: {
+    disabledStep() {
+      return this.auto || this.moving || this.finish;
+    },
     ...mapState({
       number: "number",
       stacks: "stacks",
@@ -171,8 +182,14 @@ export default {
 };
 </script>
 <style>
+.menu-title {
+  font-family: "SejongGeulggot";
+  font-size: 35px;
+  font-weight: 600;
+}
 .menu-box {
   width: 1200px;
+  margin-top: 30px;
   display: flex;
   justify-content: space-between;
   align-items: end;
@@ -186,6 +203,7 @@ export default {
   padding-left: 10px;
   border-radius: 10px;
   border: gray 1px solid;
+  font-family: "SejongGeulggot";
   font-size: 1rem;
 }
 .menu-count-button {
@@ -194,19 +212,22 @@ export default {
   width: 60px;
   border-radius: 10px;
   border: none;
-  background-color: lightgray;
+  background-color: #778899;
+  color: white;
   font-size: 1rem;
   font-weight: 600;
+  font-family: "SejongGeulggot";
   cursor: pointer;
 }
 .menu-count-button:hover {
-  background-color: rgb(179, 179, 179);
+  background-color: #657381;
 }
 
 .menu-step {
   display: flex;
 }
 .menu-main-text {
+  /* font-family: "SejongGeulggot"; */
   font-size: 1.75rem;
   padding-right: 30px;
 }
@@ -218,17 +239,18 @@ export default {
   width: 90px;
   border-radius: 10px;
   border: none;
-  background-color: lightgray;
   margin: 0 20px;
+  color: white;
   cursor: pointer;
 }
 .menu-step-button:hover {
-  background-color: rgb(179, 179, 179);
+  background-color: #535353;
 }
 .menu-step-button:disabled {
   pointer-events: none;
 }
 .menu-step-text {
+  font-family: "SejongGeulggot";
   font-size: 1rem;
   font-weight: 600;
   padding-right: 5px;
@@ -241,27 +263,37 @@ export default {
   width: 90px;
   border-radius: 10px;
   border: none;
-  background-color: lightgray;
+  background-color: #778899;
+  color: white;
   cursor: pointer;
 }
 .menu-auto-button:hover {
-  background-color: rgb(179, 179, 179);
+  background-color: #657381;
 }
 .menu-auto-button:disabled {
   pointer-events: none;
 }
 .menu-auto-text {
+  font-family: "SejongGeulggot";
   font-size: 1rem;
   font-weight: 600;
   padding-right: 5px;
 }
 .menu-footer {
+  position: absolute;
   padding: 10px 0;
+  font-family: "SejongGeulggot";
   font-size: 1rem;
   font-weight: 600;
 }
 .menu-footer-number {
   font-size: 1.25rem;
   font-weight: 600;
+}
+.menu-footer-finish {
+  position: absolute;
+  width: 70px;
+  left: 995px;
+  margin-top: 30px;
 }
 </style>

@@ -26,6 +26,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   height: 100vh;
+  /* font-family: "SejongGeulggot"; */
 }
 .container {
   height: calc(100vh - 60px);

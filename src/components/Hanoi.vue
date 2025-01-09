@@ -99,6 +99,7 @@ export default {
   box-shadow: 0.5px 0.5px 0.5px #5c5c5c;
   text-align: center;
   align-content: center;
+  font-family: "SejongGeulggot";
   font-size: 0.5rem;
   font-weight: 600;
 }
