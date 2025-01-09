@@ -1,5 +1,6 @@
 var path = require("path");
 var webpack = require("webpack");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   entry: "./src/main.js",
@@ -69,10 +70,15 @@ if (process.env.NODE_ENV === "production") {
         NODE_ENV: '"production"',
       },
     }),
-    new webpack.optimize.UglifyJsPlugin({
+    new UglifyJsPlugin({
       sourceMap: true,
-      compress: {
-        warnings: false,
+      uglifyOptions: {
+        compress: {
+          warnings: false, // 경고 제거
+        },
+        output: {
+          comments: false, // 주석 제거
+        },
       },
     }),
     new webpack.LoaderOptionsPlugin({
