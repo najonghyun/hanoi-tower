@@ -12,19 +12,19 @@
 
 ### 초기 화면
 
-<img src="https://github.com/user-attachments/assets/a8f92686-f70e-434e-a9ed-5d60e8dec6ea" width="30%" height="30%">
+<img src="https://github.com/user-attachments/assets/a8f92686-f70e-434e-a9ed-5d60e8dec6ea" width="70%" height="70%">
 
 ### 준비 완료 시
 
-<img src="https://github.com/user-attachments/assets/29d5736b-ac5e-463f-b038-d8fc281ac3ab" width="30%" height="30%">
+<img src="https://github.com/user-attachments/assets/29d5736b-ac5e-463f-b038-d8fc281ac3ab" width="70%" height="70%">
 
 ### step 이동
 
-<img src="https://github.com/user-attachments/assets/b9e109c4-b6c9-4be2-9a53-353d6d19b9ae" width="30%" height="30%">
+<img src="https://github.com/user-attachments/assets/b9e109c4-b6c9-4be2-9a53-353d6d19b9ae" width="70%" height="70%">
 
 ### 모두 옮길 시
 
-<img src="https://github.com/user-attachments/assets/99a3b4c3-ec21-4d56-922b-d30444a0d39b" width="30%" height="30%">
+<img src="https://github.com/user-attachments/assets/99a3b4c3-ec21-4d56-922b-d30444a0d39b" width="70%" height="70%">
 
 <br>
 <br>
