@@ -1,18 +1,30 @@
-# 하노이의 탑
+# 🚥 하노이의 탑
 
 ---
 
-### "하노이의 탑"을 누구나 직관적으로 즐길 수 있도록 UI로 새롭게 구현해 보았습니다.
+### "하노이의 탑"을 누구나 직관적으로 즐길 수 있도록 웹사이트로 새롭게 구현해 보았습니다.
 
 ---
 
 <br>
 
-## 💻 화면 미리보기기
+## 💻 화면 미리보기
 
-### 메인화면
+### 초기 화면
 
-<img src="https://github.com/najonghyun/hanoi-tower/tree/main/src/assets/screenshots/screenshot1.png" width="30%" height="30%">
+<img src="https://github.com/user-attachments/assets/a8f92686-f70e-434e-a9ed-5d60e8dec6ea" width="30%" height="30%">
+
+### 준비 완료 시
+
+<img src="https://github.com/user-attachments/assets/29d5736b-ac5e-463f-b038-d8fc281ac3ab" width="30%" height="30%">
+
+### step 이동
+
+<img src="https://github.com/user-attachments/assets/b9e109c4-b6c9-4be2-9a53-353d6d19b9ae" width="30%" height="30%">
+
+### 모두 옮길 시
+
+<img src="https://github.com/user-attachments/assets/99a3b4c3-ec21-4d56-922b-d30444a0d39b" width="30%" height="30%">
 
 <br>
 <br>
@@ -25,9 +37,9 @@
 
 ### 💡 기획
 
-"하노이의 탑"을 시각적으로 쉽게 체험할 수 있도록 제작한 프로젝트입니다. 복잡한 알고리즘을 이해하는 대신, 단순히 보고, 느끼며, 체험할 수 있도록 직관적인 인터페이스로 구성했습니다.
+"하노이의 탑"을 시각적으로 쉽게 체험할 수 있도록 Vue를 활용해 웹 사이트 형태로 제작한 프로젝트입니다. 복잡한 알고리즘을 이해하는 대신, 단순히 보고, 느끼며, 체험할 수 있도록 직관적인 UI로 구성했습니다.
 
-이 프로젝트를 통해 알고리즘이 어렵고 딱딱하다는 선입견을 깨고, 누구나 논리적 사고의 즐거움을 느낄 수 있기를 기대합니다.
+이 프로젝트를 통해 알고리즘이 어렵고 딱딱하다는 선입견을 깨고, 누구나 논리적 사고의 즐거움을 느낄 수 있기를 기대하고 있습니다.
 
 ### 🖇️ 기능
 
