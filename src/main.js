@@ -7,7 +7,6 @@ import "./assets/fonts/index.css";
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 new Vue({
-  el: "#app",
   store,
   render: (h) => h(App),
-});
+}).$mount("#app");

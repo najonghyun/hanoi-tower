@@ -51,6 +51,7 @@
 import { mapState, mapMutations } from "vuex";
 
 export default {
+  name: "hanoiComponent",
   data() {
     return {
       inputNumber: "",
@@ -62,9 +63,6 @@ export default {
       interval: null,
     };
   },
-  // created() {
-  //   this.CLEAR_STACK();
-  // },
   mounted() {
     this.$refs.input.focus();
   },

@@ -1,18 +1,24 @@
 <template>
   <div class="body">
     <div class="hanoi-container">
-      <div class="hanoi-topbox">
-        <div class="hanoi-stack"><div class="hanoi-stack-bar"></div></div>
-        <div class="hanoi-stack"><div class="hanoi-stack-bar"></div></div>
-        <div class="hanoi-stack"><div class="hanoi-stack-bar"></div></div>
+      <div class="hanoi-background-box">
+        <div class="hanoi-background-stack">
+          <div class="hanoi-background-stack-bar"></div>
+        </div>
+        <div class="hanoi-background-stack">
+          <div class="hanoi-background-stack-bar"></div>
+        </div>
+        <div class="hanoi-background-stack">
+          <div class="hanoi-background-stack-bar"></div>
+        </div>
       </div>
-      <div class="hanoi-item-box">
+      <div class="hanoi-items-box">
         <div v-for="stack in stacks" :key="stack.id">
-          <transition-group name="hanoi-move" tag="div">
+          <transition-group tag="div">
             <div
               v-for="item in stack.data.items"
               :key="item.id"
-              class="hanoi-move-circle"
+              class="hanoi-items-circle"
               :style="{
                 width: `${25 + item.id * 28}px`,
                 backgroundImage: `linear-gradient(180deg, ${item.color}, ${item.darkColor})`,
@@ -20,12 +26,12 @@
                 opacity: item.hidden ? 0 : 1,
               }"
             >
-              {{ item.id }}
+              <!-- {{ item.id }} -->
             </div>
           </transition-group>
         </div>
       </div>
-      <div class="hanoi-bottombox"></div>
+      <div class="hanoi-items-bottom"></div>
     </div>
   </div>
 </template>
@@ -33,6 +39,7 @@
 import { mapState } from "vuex";
 
 export default {
+  name: "hanoiComponent",
   data() {
     return {
       count: 0,
@@ -56,14 +63,14 @@ export default {
   height: 400px;
 }
 
-.hanoi-topbox {
+.hanoi-background-box {
   display: flex;
 }
-.hanoi-stack {
+.hanoi-background-stack {
   flex: 1;
   justify-items: center;
 }
-.hanoi-stack-bar {
+.hanoi-background-stack-bar {
   margin-top: 130px;
   width: 15px;
   height: 270px;
@@ -72,7 +79,7 @@ export default {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
-.hanoi-item-box {
+.hanoi-items-box {
   width: 100%;
   position: absolute;
   top: 0;
@@ -82,7 +89,7 @@ export default {
   min-width: 1000px;
   display: flex;
 }
-.hanoi-move-circle {
+.hanoi-items-circle {
   position: absolute;
   height: 20px;
   bottom: 0;
@@ -97,7 +104,7 @@ export default {
   font-weight: 600;
 }
 
-.hanoi-bottombox {
+.hanoi-items-bottom {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3)),
     url("../assets/images/wood.jpg");
   height: 35px;
