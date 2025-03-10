@@ -1,14 +1,20 @@
-# 🚥 하노이의 탑
+# 🚥 하노이의 탑 &nbsp; <img src="https://img.shields.io/badge/Vue.js-4FC08D?style=flat-square&logo=Vue.js&logoColor=white"/> <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=Vercel&logoColor=white"/>
+
+#### "하노이의 탑"을 누구나 직관적으로 즐길 수 있도록 웹사이트로 새롭게 구현해 보았습니다.
+
+### https://hanoi-tower-jh.vercel.app/
 
 ---
 
-### "하노이의 탑"을 누구나 직관적으로 즐길 수 있도록 웹사이트로 새롭게 구현해 보았습니다.
-### 웹 방문 : https://hanoi-tower-jh.vercel.app/
+### 웹 / 개인 미니 프로젝트
+
+### 2025.01.06 ~ 2025.01.10
+
+> **동적 UI 요소 제어와 애니메이션을 포함한 레이아웃 구성 및 기능 개발**
+
 ---
 
-<br>
-
-## 💻 화면 미리보기
+### 💻 Overview
 
 ### 초기 화면
 
@@ -30,10 +36,6 @@
 <br>
 
 ---
-
-### 📅 진행 기간
-
-2025.01.06 ~ 2025.01.10
 
 ### 💡 기획
 
